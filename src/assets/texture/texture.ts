@@ -1,26 +1,20 @@
-import { grassImg, dirtImg, dioriteImg, glassImg, obsidianImg } from "./images";
+import { grassImg, dirtImg, glassImg, logImg, woodImg } from "./images";
 
 import { TextureLoader, RepeatWrapping, NearestFilter } from "three";
 
-const groundTexture = new TextureLoader().load(grassImg);
+const grassTexture = new TextureLoader().load(grassImg);
 const dirtTexture = new TextureLoader().load(dirtImg);
-const dioriteTexture = new TextureLoader().load(dioriteImg);
-const obsidianTexture = new TextureLoader().load(obsidianImg);
 const glassTexture = new TextureLoader().load(glassImg);
+const logTexture = new TextureLoader().load(logImg);
+const woodTexture = new TextureLoader().load(woodImg);
 
-groundTexture.wrapS = RepeatWrapping;
-groundTexture.wrapT = RepeatWrapping;
+grassTexture.wrapS = RepeatWrapping;
+grassTexture.wrapT = RepeatWrapping;
 
-groundTexture.magFilter = NearestFilter;
+grassTexture.magFilter = NearestFilter;
 dirtTexture.magFilter = NearestFilter;
-dioriteTexture.magFilter = NearestFilter;
-obsidianTexture.magFilter = NearestFilter;
 glassTexture.magFilter = NearestFilter;
+logTexture.magFilter = NearestFilter;
+woodTexture.magFilter = NearestFilter;
 
-export {
-    groundTexture,
-    dirtTexture,
-    dioriteTexture,
-    obsidianTexture,
-    glassTexture,
-};
+export { grassTexture, dirtTexture, glassTexture, logTexture, woodTexture };

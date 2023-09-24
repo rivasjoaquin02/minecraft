@@ -1,5 +1,8 @@
 import { usePlane } from "@react-three/cannon";
-import { groundTexture } from "../assets/texture/texture";
+import { useStore } from "../hooks/useStore";
+import { ThreeEvent } from "@react-three/fiber";
+
+import { grassTexture } from "../assets/texture/texture";
 
 function Ground() {
     const [ref] = usePlane(() => ({
@@ -7,10 +10,19 @@ function Ground() {
         position: [0, -0.5, 0],
     }));
 
+    const addCube = useStore((state) => state.addCube);
+
+    const handleClickGround = (event: ThreeEvent<MouseEvent>) => {
+        event.stopPropagation();
+
+        const [x, y, z] = Object.values(event.point).map((n) => Math.ceil(n));
+        addCube(x, y, z);
+    };
+
     return (
-        <mesh ref={ref}>
+        <mesh ref={ref} onClick={handleClickGround}>
             <planeGeometry attach="geometry" args={[100, 100]} />
-            <meshStandardMaterial attach="material" map={groundTexture} />
+            <meshStandardMaterial attach="material" map={grassTexture} />
         </mesh>
     );
 }

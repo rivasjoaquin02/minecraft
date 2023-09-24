@@ -1,17 +1,18 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 
+type Cube = {
+    id: string;
+    pos: [number, number, number];
+    texture: string;
+};
+
 export const useStore = create<{
     texture: string;
-    cubes: [
-        {
-            id: string;
-            pos: [number, number, number];
-            texture: string;
-        }
-    ];
-    addCube: () => void;
-    removeCube: () => void;
+    cubes: Array<Cube>;
+    addCube: (x: number, y: number, z: number) => void;
+    setTexture: (texture: string) => void;
+    removeCube: (cubeId: string) => void;
     saveWorld: () => void;
     resetWorld: () => void;
 }>((set) => ({
@@ -28,7 +29,7 @@ export const useStore = create<{
             texture: "diorite",
         },
     ],
-    addCube: () => {
+    addCube: (x, y, z) => {
         set((state) => ({
             cubes: [
                 ...state.cubes,
@@ -36,7 +37,14 @@ export const useStore = create<{
             ],
         }));
     },
-    removeCube: () => {},
+    setTexture: (texture: string) => {
+        set({ texture });
+    },
+    removeCube: (cubeId) => {
+        set((state) => ({
+            cubes: state.cubes.filter(({ id }) => id !== cubeId),
+        }));
+    },
     saveWorld: () => {},
     resetWorld: () => {},
 }));

@@ -5,7 +5,7 @@ function Cubes() {
     const cubes = useStore((state) => state.cubes);
 
     return cubes.map(({ id, pos, texture }) => (
-        <Cube key={id} position={pos} texture={texture} />
+        <Cube key={id} id={id} position={pos} texture={texture} />
     ));
 }
 

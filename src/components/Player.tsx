@@ -17,8 +17,6 @@ function Player() {
         position: [0, 1, 0],
     }));
 
-    console.log(moveForward, moveBackward, moveLeft, moveRight);
-
     const pos = useRef([0, 0, 0]);
     useEffect(() => {
         api.position.subscribe((p) => (pos.current = p));
